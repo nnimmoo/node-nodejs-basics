@@ -8,5 +8,12 @@ const echoInput = (chunk) => {
     if (chunkStringified.includes('CLOSE')) process.exit(0);
     process.stdout.write(`Received from master process: ${chunk.toString()}\n`)
 };
-
+//transforms all inputs from terminal
+process.on("message", data=>{
+    for (let index = 0; index < data.length; index++) {
+        echoInput(data[index]);
+        
+    }
+});;
 process.stdin.on('data', echoInput);
+
